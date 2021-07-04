@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_dt"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp">
+
+    <TextView
+        android:id="@+id/make_your_time"
+        android:layout_width="268dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="88dp"
+        android:gravity="center_horizontal|top"
+        android:text="@string/make_your_time"
+        android:textColor="@color/beige"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_clock"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_clock_dt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/make_your_time" />
+
+    <TextView
+        android:id="@+id/quote"
+        android:layout_width="312dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_horizontal|top"
+        android:text="@string/quote"
+        android:textColor="@color/beige"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_clock" />
+
+    <TextView
+        android:id="@+id/quote_author"
+        android:layout_width="212dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center_horizontal|top"
+        android:text="@string/quote_author"
+        android:textColor="@color/beige"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/quote"
+        app:layout_constraintTop_toBottomOf="@+id/quote" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ti_username"
+        android:layout_width="228dp"
+        android:layout_height="wrap_content"
+        android:theme="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quote_author">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/username"
+            android:imeOptions="actionDone"
+            android:inputType="textEmailAddress"
+            tools:ignore="MissingConstraints" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="160dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="48dp"
+        android:backgroundTint="@color/red"
+        android:text="@string/sign_in_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ti_username" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
