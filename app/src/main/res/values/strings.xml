@@ -2,13 +2,14 @@
     <string name="app_name">Make your time</string>
     <string name="make_your_time">Make Your Time!</string>
     <string name="sign_in_btn">SIGN IN</string>
-    <string name="quote">Every minute you spend in planning saves 10 minutes in execution</string> //заменить конкретную цитату на цитаты из бд
-    <string name="quote_author"><u>©Brian Tracy</u></string> //заменить конкретного автора на автора цитаты из бд
     <string name="to_do">TO DO</string>
-    <string name="date">JULY 01, 2021</string> //заменить на актуальную дату
-    <string name="percents">80%</string>
     <string name="username">Username</string>
     <string name="dark_mode">dark mode</string>
-    //заменить на актуальный процент выполнения
+    <string name="quote">Every minute you spend in planning saves 10 minutes in execution</string> //пример цитаты
+    <string name="quote_author"><u>©Brian Tracy</u></string> //пример автора
+    <string name="date">JULY 01, 2021</string> //пример даты
+    <string name="percents">80%</string> //пример процентов выполнения
+    <string name="time">18:00</string> //пример времени
+    <string name="task_task_t">Task task task</string> //пример задания
 
 </resources>

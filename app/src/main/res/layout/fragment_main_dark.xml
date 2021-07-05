@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="28dp"
+    android:paddingHorizontal="12dp"
+    android:background="@color/black_dt">
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="12dp"
+        android:gravity="center_vertical"
+        android:text="@string/date"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_calendar"
+        app:layout_constraintStart_toEndOf="@+id/btn_calendar" />
+
+    <TextView
+        android:id="@+id/tv_to_do"
+        android:layout_width="76dp"
+        android:layout_height="28dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="12dp"
+        android:gravity="center_vertical"
+        android:text="@string/to_do"
+        android:textColor="@color/red"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_calendar" />
+
+    <Button
+        android:id="@+id/btn_calendar"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@drawable/ic_calendar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/some_id"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="@string/percents"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_calendar"
+        app:layout_constraintStart_toEndOf="@+id/iv_statistics"
+        app:layout_constraintTop_toTopOf="@+id/tv_date"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/iv_statistics"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_statistics_dt"
+        android:layout_marginStart="12dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_calendar"
+        app:layout_constraintStart_toEndOf="@+id/tv_date"
+        app:layout_constraintTop_toTopOf="@+id/btn_calendar" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic__add_dt"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
