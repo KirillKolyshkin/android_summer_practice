@@ -8,6 +8,7 @@
     <string name="date">JULY 01, 2021</string> //заменить на актуальную дату
     <string name="percents">80%</string>
     <string name="username">Username</string>
+    <string name="dark_mode">dark mode</string>
     //заменить на актуальный процент выполнения
 
 </resources>

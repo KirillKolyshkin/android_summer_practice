@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:paddingTop="16dp"
     android:paddingBottom="16dp">
 
     <ImageView
@@ -46,7 +45,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:paddingStart="16dp"
-        android:src="@drawable/ic_notification"
+        android:src="@drawable/ic_notification_lt"
         app:layout_constraintEnd_toEndOf="@+id/iv_person"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +56,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:paddingStart="16dp"
-        android:src="@drawable/ic_mode"
+        android:src="@drawable/ic_mode_lt"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_bell" />
@@ -68,7 +67,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:paddingStart="16dp"
-        android:src="@drawable/ic_person"
+        android:src="@drawable/ic_person_lt"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/iv_back_1" />
@@ -77,7 +76,6 @@
         android:id="@+id/tv_username"
         android:layout_width="288dp"
         android:layout_height="60dp"
-        android:layout_marginTop="68dp"
         android:gravity="center_vertical"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
@@ -94,10 +92,10 @@
         android:layout_height="60dp"
         android:paddingEnd="16dp"
         android:paddingStart="16dp"
-        android:text="darkmode"
+        android:text="@string/dark_mode"
         android:textColor="@color/black_dt"
         android:textSize="24sp"
-        style="@style/Switch"
+        android:theme="@style/Switch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_mode"
         app:layout_constraintTop_toBottomOf="@+id/switch_notification"
