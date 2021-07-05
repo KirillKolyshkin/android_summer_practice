@@ -63,6 +63,7 @@
         android:id="@+id/ti_username"
         android:layout_width="228dp"
         android:layout_height="wrap_content"
+        app:boxStrokeColor="@color/dark_grey"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
@@ -74,8 +75,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/username"
+            android:textColorHint="@color/dark_grey"
             android:imeOptions="actionDone"
-            android:inputType="textEmailAddress"
+            android:inputType="textPersonName"
             tools:ignore="MissingConstraints" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,6 +88,8 @@
         android:layout_marginBottom="48dp"
         android:backgroundTint="@color/red"
         android:text="@string/sign_in_btn"
+        android:shadowColor="@color/black_dt"
+        android:shadowRadius="15"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
