@@ -97,7 +97,7 @@
         android:text="darkmode"
         android:textColor="@color/black_dt"
         android:textSize="24sp"
-        android:theme="@style/Switch"
+        style="@style/Switch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_mode"
         app:layout_constraintTop_toBottomOf="@+id/switch_notification"

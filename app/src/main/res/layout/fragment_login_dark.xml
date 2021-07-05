@@ -63,7 +63,7 @@
         android:id="@+id/ti_username"
         android:layout_width="228dp"
         android:layout_height="wrap_content"
-        android:theme="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
