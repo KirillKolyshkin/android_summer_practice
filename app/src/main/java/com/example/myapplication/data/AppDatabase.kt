@@ -10,23 +10,23 @@ import com.example.myapplication.data.entities.Task
 abstract class AppDatabase : RoomDatabase() {
     abstract fun taskDao() : TaskDao
 
+
     companion object{
         @Volatile
         private var INSTANCE : AppDatabase? = null
 
-        fun getDatabase(context: Context) : AppDatabase{
-            var tempInstance = INSTANCE
-            if(tempInstance != null)
-                return tempInstance
-            synchronized(this){
-                var instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    AppDatabase::class.java,
-                    "application_database"
-                ).build()
-                INSTANCE = instance
-                return instance
+        fun getDatabase(context: Context) : AppDatabase =
+            INSTANCE ?: synchronized(this){
+                INSTANCE ?: buildDatabase(context).also {
+                    INSTANCE = it
+                }
             }
-        }
+
+        private fun buildDatabase(context: Context) =
+            Room.databaseBuilder(
+                context.applicationContext,
+                AppDatabase::class.java,
+                "app_database"
+            ).build()
     }
 }
