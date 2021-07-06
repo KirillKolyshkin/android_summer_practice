@@ -11,7 +11,7 @@ data class Task(
     @ColumnInfo(name = "text")
     var text: String,
     @ColumnInfo(name = "timestamp")
-    var timestamp: Long,
+    var timestamp: Int,
     @ColumnInfo(name = "state")
     var isDode: Boolean,
 )
