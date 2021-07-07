@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:paddingBottom="16dp">
+    android:paddingBottom="@dimen/spacing_normal">
 
     <ImageView
         android:id="@+id/iv_back_1"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/spacing_settings"
         android:src="@drawable/settings_background3"
         app:layout_constraintBottom_toBottomOf="@+id/tv_username"
         app:layout_constraintEnd_toEndOf="@+id/btn_name"
@@ -23,7 +23,7 @@
     <ImageView
         android:id="@+id/iv_back_2"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/spacing_settings"
         android:src="@drawable/settings_background4"
         app:layout_constraintBottom_toBottomOf="@+id/switch_notification"
         app:layout_constraintEnd_toEndOf="@+id/switch_notification"
@@ -33,7 +33,7 @@
     <ImageView
         android:id="@+id/iv_back_3"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="@dimen/spacing_settings"
         android:src="@drawable/settings_background3"
         app:layout_constraintBottom_toBottomOf="@+id/switch_darkmode"
         app:layout_constraintEnd_toEndOf="@+id/switch_darkmode"
@@ -42,9 +42,9 @@
 
     <ImageView
         android:id="@+id/iv_bell"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:paddingStart="16dp"
+        android:layout_width="@dimen/spacing_settings"
+        android:layout_height="@dimen/spacing_settings"
+        android:paddingStart="@dimen/spacing_normal"
         android:src="@drawable/ic_notification_lt"
         app:layout_constraintEnd_toEndOf="@+id/iv_person"
         app:layout_constraintHorizontal_bias="1.0"
@@ -53,9 +53,9 @@
 
     <ImageView
         android:id="@+id/iv_mode"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:paddingStart="16dp"
+        android:layout_width="@dimen/spacing_settings"
+        android:layout_height="@dimen/spacing_settings"
+        android:paddingStart="@dimen/spacing_normal"
         android:src="@drawable/ic_mode_lt"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,9 +64,9 @@
 
     <ImageView
         android:id="@+id/iv_person"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:paddingStart="16dp"
+        android:layout_width="@dimen/spacing_settings"
+        android:layout_height="@dimen/spacing_settings"
+        android:paddingStart="@dimen/spacing_normal"
         android:src="@drawable/ic_person_lt"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,14 +74,14 @@
 
     <TextView
         android:id="@+id/tv_username"
-        android:layout_width="288dp"
-        android:layout_height="60dp"
+        android:layout_width="@dimen/spacing_width_username_settings"
+        android:layout_height="@dimen/spacing_settings"
         android:gravity="center_vertical"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:paddingStart="@dimen/spacing_normal"
+        android:paddingEnd="@dimen/spacing_normal"
         android:text="username"
         android:textColor="@color/black_dt"
-        android:textSize="24sp"
+        android:textSize="@dimen/text_size_normal"
         app:layout_constraintStart_toEndOf="@+id/iv_person"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
@@ -89,12 +89,12 @@
     <Switch
         android:id="@+id/switch_darkmode"
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:paddingEnd="16dp"
-        android:paddingStart="16dp"
+        android:layout_height="@dimen/spacing_settings"
+        android:paddingEnd="@dimen/spacing_normal"
+        android:paddingStart="@dimen/spacing_normal"
         android:text="@string/dark_mode"
         android:textColor="@color/black_dt"
-        android:textSize="24sp"
+        android:textSize="@dimen/text_size_normal"
         android:theme="@style/Switch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/iv_mode"
@@ -104,12 +104,12 @@
     <Switch
         android:id="@+id/switch_notification"
         android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:layout_height="@dimen/spacing_settings"
+        android:paddingStart="@dimen/spacing_normal"
+        android:paddingEnd="@dimen/spacing_normal"
         android:text="notification"
         android:textColor="@color/black_dt"
-        android:textSize="24sp"
+        android:textSize="@dimen/text_size_normal"
         android:theme="@style/Switch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_bell"
@@ -118,8 +118,8 @@
 
     <Button
         android:id="@+id/btn_name"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="@dimen/spacing_edit_settings"
+        android:layout_height="@dimen/spacing_edit_settings"
         android:background="@drawable/ic_pen"
         app:layout_constraintBottom_toBottomOf="@+id/tv_username"
         app:layout_constraintEnd_toEndOf="parent"

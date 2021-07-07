@@ -5,19 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_dt"
-    android:paddingHorizontal="24dp"
-    android:paddingTop="16dp"
-    android:paddingBottom="16dp">
+    android:paddingHorizontal="@dimen/spacing_very_large"
+    android:paddingTop="@dimen/spacing_normal"
+    android:paddingBottom="@dimen/spacing_normal">
 
     <TextView
         android:id="@+id/make_your_time"
-        android:layout_width="268dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="72dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_top_login"
         android:gravity="center_horizontal|top"
         android:text="@string/make_your_time"
         android:textColor="@color/beige"
-        android:textSize="32sp"
+        android:textSize="@dimen/text_size_large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,9 +25,9 @@
 
     <ImageView
         android:id="@+id/iv_clock"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="@dimen/spacing_icon_login"
+        android:layout_height="@dimen/spacing_icon_login"
+        android:layout_marginTop="@dimen/spacing_small"
         android:src="@drawable/ic_clock_dt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,13 +35,13 @@
 
     <TextView
         android:id="@+id/quote"
-        android:layout_width="336dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
         android:gravity="center_horizontal|top"
         android:text="@string/quote"
         android:textColor="@color/beige"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size_small"
         android:textStyle="italic"
         android:fontFamily="sans-serif-condensed-light"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,20 +50,21 @@
 
     <TextView
         android:id="@+id/quote_author"
-        android:layout_width="212dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_small"
+        android:layout_marginEnd="@dimen/spacing_huge"
         android:gravity="center_horizontal|top"
         android:text="@string/quote_author"
         android:textColor="@color/beige"
-        android:textSize="16sp"
+        android:textSize="@dimen/text_size_smaller"
         android:fontFamily="sans-serif-condensed-light"
         app:layout_constraintEnd_toEndOf="@+id/quote"
         app:layout_constraintTop_toBottomOf="@+id/quote" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/ti_username"
-        android:layout_width="228dp"
+        android:layout_width="@dimen/spacing_text_input"
         android:layout_height="wrap_content"
         app:boxStrokeColor="@color/dark_grey"
         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
@@ -85,9 +86,9 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="160dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="48dp"
+        android:layout_width="@dimen/spacing_icon_login"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_huge"
         android:backgroundTint="@color/red"
         android:text="@string/sign_in_btn"
         android:fontFamily="sans-serif-condensed-medium"
