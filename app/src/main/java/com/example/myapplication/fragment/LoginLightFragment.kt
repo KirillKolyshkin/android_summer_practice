@@ -1,17 +1,23 @@
 package com.example.myapplication.fragment
 
 
-
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.NavHostFragment.findNavController
+import android.widget.Button
+import android.widget.EditText
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.myapplication.R
+import com.example.myapplication.data.entities.User
+import com.example.myapplication.data.view_model.UserViewModel
 
 
-class LoginLightFragment : Fragment() {
+class LoginLightFragment() : Fragment(){
+
+    private lateinit var userViewModel : UserViewModel
 
 
 
@@ -20,14 +26,18 @@ class LoginLightFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view =  inflater.inflate(R.layout.fragment_login_light, container, false)
+    ): View {
+        val view: View =  inflater.inflate(R.layout.fragment_login_light, container, false)
 
+        val loginBtn: Button = view.findViewById(R.id.button)
 
+        //userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
-//        view.button.setOnClickListener{
-//            findNavController().navigate(R.id.action_login_light_to_main_light)
-//        }
+        loginBtn.setOnClickListener(){
+
+            insertDataToDatabase()
+            view.findNavController().navigate(R.id.action_login_light_to_main_light)
+       }
 
 
 
@@ -35,11 +45,22 @@ class LoginLightFragment : Fragment() {
         return view
     }
 
+    private fun insertDataToDatabase() {
+        val name : String = view?.findViewById<EditText>(R.id.et_username).toString()
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
+//        if(name.isNotEmpty()){
+//            val user = User(name)
+//            userViewModel.addUser(user)
+//        }
     }
+
+
+
+
+
+
+
+
 }
 
 
