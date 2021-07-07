@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/project_nav">
+
+    <fragment
+        android:id="@+id/login_light"
+        android:name="com.example.myapplication.fragment.LoginLightFragment"
+        tools:layout="@layout/fragment_login_light"
+    >
+        <action
+            android:id="@+id/action_login_light_to_main_light"
+            app:destination="@id/main_light" />
+    </fragment>
+    <fragment
+        android:id="@+id/main_light"
+        android:name="com.example.myapplication.fragment.LoginLightFragment"
+        tools:layout="@layout/fragment_main_light"
+        />
+</navigation>
