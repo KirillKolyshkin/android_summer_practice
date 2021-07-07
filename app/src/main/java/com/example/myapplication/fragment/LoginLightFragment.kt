@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+
 import android.widget.Button
 import android.widget.EditText
 import androidx.lifecycle.ViewModelProvider
@@ -15,17 +16,18 @@ import com.example.myapplication.data.entities.User
 import com.example.myapplication.data.view_model.UserViewModel
 
 
-class LoginLightFragment() : Fragment(){
+
+class LoginLightFragment : Fragment() {
+
 
     private lateinit var userViewModel : UserViewModel
-
-
 
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View {
         val view: View =  inflater.inflate(R.layout.fragment_login_light, container, false)
 
@@ -39,11 +41,10 @@ class LoginLightFragment() : Fragment(){
             view.findNavController().navigate(R.id.action_login_light_to_main_light)
        }
 
-
-
-
         return view
     }
+
+
 
     private fun insertDataToDatabase() {
         val name : String = view?.findViewById<EditText>(R.id.et_username).toString()
@@ -53,15 +54,8 @@ class LoginLightFragment() : Fragment(){
 //            userViewModel.addUser(user)
 //        }
     }
-
-
-
-
-
-
-
-
 }
+
 
 
 
