@@ -33,6 +33,18 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun findUserByName(name: String){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.findUserByName(name)
+        }
+    }
+
+    fun findTaskById(task_id: Int){
+        viewModelScope.launch(Dispatchers.IO){
+            repository.findTaskById(task_id)
+        }
+    }
+
     fun updateTask(task : Task){
         viewModelScope.launch(Dispatchers.IO){
             repository.updateTask(task)

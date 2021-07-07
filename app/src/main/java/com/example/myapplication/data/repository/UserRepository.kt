@@ -21,6 +21,14 @@ class UserRepository(private val userDao: UserDao) {
         userDao.getTasksOfUser(name)
     }
 
+    suspend fun findUserByName(name: String){
+        userDao.findUserByName(name)
+    }
+
+    suspend fun findTaskById(task_id: Int){
+        userDao.findTaskById(task_id)
+    }
+
     suspend fun updateUser(user: User){
         userDao.updateUser(user)
     }
