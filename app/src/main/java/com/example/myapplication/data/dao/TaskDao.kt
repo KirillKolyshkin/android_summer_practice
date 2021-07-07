@@ -1,4 +1,4 @@
-package com.example.myapplication.data
+package com.example.myapplication.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
@@ -7,20 +7,20 @@ import com.example.myapplication.data.entities.Task
 @Dao
 interface TaskDao {
     @Query("SELECT * FROM tasks")
-    fun getAll(): LiveData<List<Task>>
+    fun getAllTasks(): LiveData<List<Task>>
 
     @Query("SELECT * FROM tasks WHERE task_id IN (:taskIds) ORDER BY timestamp")
-    fun loadByIds(taskIds: IntArray): List<Task>
+    suspend fun loadTasksById(taskIds: IntArray): List<Task>
 
     @Query("SELECT * FROM tasks WHERE task_id = :uid LIMIT 1")
-    fun findById(uid: Int): Task
+    suspend fun findTaskById(uid: Int): Task
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(task: Task)
+    suspend fun addTask(task: Task)
 
     @Update
-    fun update(task: Task)
+    suspend fun updateTask(task: Task)
 
     @Delete
-    fun delete(task: Task)
+    suspend fun deleteTask(task: Task)
 }
