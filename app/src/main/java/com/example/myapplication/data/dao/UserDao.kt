@@ -2,24 +2,44 @@ package com.example.myapplication.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.myapplication.data.entities.Task
 import com.example.myapplication.data.entities.User
-
+import com.example.myapplication.data.entities.UserWithTasks
 
 @Dao
 interface UserDao {
-
-    @Query("SELECT * FROM user_table ORDER BY id ASC")
-    fun readAllData(): LiveData<List<User>>
-
-    @Query("SELECT * FROM user_table WHERE id = :id")
-    fun getById(id: Long): User?
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addUser(user: User?)
+    suspend fun addUser(user: User)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addTask(task: Task)
+
+    @Query("SELECT * FROM user_table")
+    fun getAllUsers() : LiveData<List<User>>
+
+    @Query("SELECT * FROM user_table WHERE name = :name LIMIT 1")
+    suspend fun findUserByName(name: String) : User
+
+    @Query("SELECT * FROM tasks WHERE task_id = :task_id LIMIT 1")
+    suspend fun findTaskById(task_id: Int)
+
+    @Transaction
+    @Query("SELECT * FROM user_table WHERE name = :name")
+    suspend fun getTasksOfUser(name: String) : List<UserWithTasks>
 
     @Update
-    fun update(user: User?)
+    suspend fun updateUser(user: User)
+
+    @Update
+    suspend fun updateTask(task: Task)
 
     @Delete
-    fun delete(user: User?)
+    suspend fun deleteTask(task: Task)
+
+    @Delete
+    suspend fun deleteUser(user: User)
+
+
+
+
 }
