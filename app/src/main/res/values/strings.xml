@@ -1,3 +1,21 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Make your time</string>
+    <string name="make_your_time">Make Your Time!</string>
+    <string name="sign_in_btn">SIGN IN</string>
+    <string name="to_do">TO DO</string>
+    <string name="username">Username</string>
+    <string name="dark_mode">dark mode</string>
+    <string name="quote">Every minute you spend in planning saves 10 minutes in execution</string>
+    //пример цитаты
+    <string name="quote_author"><u>©Brian Tracy</u></string>
+    //пример автора
+    <string name="date">JULY 01, 2021</string>
+    //пример даты
+    <string name="percents">80%</string>
+    //пример процентов выполнения
+    <string name="time">18:00</string>
+    //пример времени
+    <string name="task_task_t">Task task task</string>
+    //пример задания
+
 </resources>
