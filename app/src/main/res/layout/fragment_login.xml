@@ -79,7 +79,6 @@
             android:layout_height="wrap_content"
             android:hint="@string/username"
             android:fontFamily="sans-serif-condensed-light"
-            style="@style/TextInputTheme"
             android:imeOptions="actionDone"
             android:inputType="textEmailAddress"
             tools:ignore="MissingConstraints" />
