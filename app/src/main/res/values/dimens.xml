@@ -12,14 +12,18 @@
     <dimen name="spacing_tiniest">4dp</dimen>
     <dimen name="spacing_double">32dp</dimen>
 
+
+    <dimen name="spacing_checkbox">28dp</dimen>
     <dimen name="spacing_settings">60dp</dimen>
     <dimen name="spacing_edit_settings">40dp</dimen>
     <dimen name="spacing_icons_main">50dp</dimen>
     <dimen name="spacing_top_login">70dp</dimen>
     <dimen name="spacing_icon_login">160dp</dimen>
     <dimen name="spacing_text_input">228dp</dimen>
+    <dimen name="spacing_task_width">252dp</dimen>
     <dimen name="spacing_width_username_settings">288dp</dimen>
 
+    <dimen name="text_size_tiny">12sp</dimen>
     <dimen name="text_size_smaller">16sp</dimen>
     <dimen name="text_size_small">20sp</dimen>
     <dimen name="text_size_normal">24sp</dimen>
