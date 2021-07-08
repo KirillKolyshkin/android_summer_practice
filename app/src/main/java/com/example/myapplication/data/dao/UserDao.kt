@@ -24,8 +24,8 @@ interface UserDao {
     suspend fun findTaskById(task_id: Int) : Task
 
     @Transaction
-    @Query("SELECT * FROM user_table WHERE name = :name")
-    suspend fun getTasksOfUser(name: String) : List<UserWithTasks>
+    @Query("SELECT * FROM user_table WHERE name = :name LIMIT 1")
+    suspend fun getTasksOfUser(name: String) : UserWithTasks
 
     @Update
     suspend fun updateUser(user: User)

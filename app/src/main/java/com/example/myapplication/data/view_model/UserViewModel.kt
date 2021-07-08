@@ -27,22 +27,28 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun getAllTasksOfUser(name: String){
+    fun getAllTasksOfUser(name: String): List<Task>?{
+        var tasks: List<Task>? = null
         viewModelScope.launch(Dispatchers.IO){
-            repository.getAllTasksOfUser(name)
+            tasks = repository.getAllTasksOfUser(name)
         }
+        return tasks
     }
 
-    fun findUserByName(name: String){
+    fun findUserByName(name: String): User?{
+        var user: User? = null
         viewModelScope.launch(Dispatchers.IO){
-            repository.findUserByName(name)
+             user = repository.findUserByName(name)
         }
+        return user
     }
 
-    fun findTaskById(task_id: Int){
+    fun findTaskById(task_id: Int): Task?{
+        var task: Task? = null
         viewModelScope.launch(Dispatchers.IO){
-            repository.findTaskById(task_id)
+            task = repository.findTaskById(task_id)
         }
+        return task
     }
 
     fun updateTask(task : Task){
