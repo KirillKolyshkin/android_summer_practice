@@ -7,7 +7,7 @@ import com.example.myapplication.data.UserDatabase
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_login_light)
+        setContentView(R.layout.fragment_main_light)
 
         val userDB = UserDatabase.getDatabase(this).userDao()
     }

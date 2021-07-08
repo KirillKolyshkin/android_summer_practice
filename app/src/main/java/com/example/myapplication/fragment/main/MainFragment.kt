@@ -2,59 +2,89 @@ package com.example.myapplication.fragment.main
 
 
 import android.os.Bundle
-import android.view.ContextMenu
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.MainActivity
 import com.example.myapplication.R
 import com.example.myapplication.data.UserDatabase
+import com.example.myapplication.data.entities.Task
 import com.example.myapplication.data.view_model.UserViewModel
+import com.example.myapplication.databinding.FragmentMainLightBinding
 import com.example.myapplication.fragment.main.adapter.TaskAdapter
+import java.util.stream.Collector
+import java.util.stream.Collectors
 
 class MainFragment : Fragment() {
 
-    private var binding: MainFragmentBinding? = null
+    private var binding: FragmentMainLightBinding? = null
     private var adapter: TaskAdapter? = null
     private lateinit var userViewModel: UserViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = MainFragmentBinding.inflate(inflater, container, false)
+        binding = FragmentMainLightBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val username: String? = arguments?.getString(ARG_USERNAME)
+        //binding?.tvDate =
 
         var tasks = userViewModel.getAllTasksOfUser(ARG_USERNAME)
+        if(tasks != null)
+            tasks = getTasksForCurrentDate(tasks)
         if(tasks != null) {
             adapter = TaskAdapter(tasks) { task ->
-
+                showAlertDialog(task)
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_main_llt, menu)
+        menu.getItem(R.id.username).title = arguments?.getString(ARG_USERNAME)
 
     }
 
-    override fun onCreateContextMenu(
-        menu: ContextMenu,
-        v: View,
-        menuInfo: ContextMenu.ContextMenuInfo?
-    ) {
-        super.onCreateContextMenu(menu, v, menuInfo)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.loginFragment -> {
+                findNavController().navigate(R.id.action_main_light_to_login_light)
+                return true
+            }
+            R.id.settingsFragment -> {
+                findNavController().navigate(R.id.action_main_light_to_settings_light)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    private fun showAlertDialog(task: Task){
+
+    }
+
+    private fun getTasksForCurrentDate(tasks: List<Task>): List<Task>{
+//        return tasks.stream().filter(
+//            // compare task.timestamp with tvDate
+//        ).collect(Collectors.toList())
+        return tasks
     }
 
     companion object{
