@@ -4,11 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.myapplication.data.dao.UserDao
+import com.example.myapplication.data.entities.DateTypeConverter
 import com.example.myapplication.data.entities.Task
 import com.example.myapplication.data.entities.User
 
 @Database(entities = [Task::class, User::class], version = 1, exportSchema = false)
+@TypeConverters(DateTypeConverter::class)
 abstract class UserDatabase : RoomDatabase(){
     abstract fun userDao() : UserDao
 

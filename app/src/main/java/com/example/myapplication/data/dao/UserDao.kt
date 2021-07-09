@@ -20,7 +20,7 @@ interface UserDao {
     @Query("SELECT * FROM user_table WHERE name = :name LIMIT 1")
     suspend fun findUserByName(name: String) : User
 
-    @Query("SELECT * FROM tasks WHERE task_id = :task_id LIMIT 1")
+    @Query("SELECT * FROM tasks WHERE taskId = :task_id LIMIT 1")
     suspend fun findTaskById(task_id: Int) : Task
 
     @Transaction

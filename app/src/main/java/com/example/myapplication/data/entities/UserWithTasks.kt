@@ -10,5 +10,5 @@ data class UserWithTasks(
         entity = Task::class,
         entityColumn = "task_id"
     )
-    val tasks: List<Task>
+    var tasks: List<Task>
 )
