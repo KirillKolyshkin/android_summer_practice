@@ -17,7 +17,7 @@ import com.example.myapplication.fragment.main.MainFragment
 import kotlin.random.Random
 
 
-class LoginLightFragment : Fragment(R.layout.fragment_login_light)  {
+class LoginFragment : Fragment(R.layout.fragment_login)  {
 
     private lateinit var userViewModel : UserViewModel
     private var quotes : List<String> = listOf(
@@ -44,14 +44,15 @@ class LoginLightFragment : Fragment(R.layout.fragment_login_light)  {
         savedInstanceState: Bundle?
 
     ): View {
-        val view: View =  inflater.inflate(R.layout.fragment_login_light, container, false)
+        val view: View =  inflater.inflate(R.layout.fragment_login, container, false)
+
         val randomValue: Int = (0..5).random()
 
         val quote : String = quotes[randomValue]
         val quoteAuthor : String = quotesAuthors[randomValue]
 
-        val authorEt : EditText = view.findViewById<EditText>(R.id.quote_author)
-        val quoteEt : EditText = view.findViewById<EditText>(R.id.quote)
+        val authorEt : EditText = view.findViewById(R.id.quote_author)
+        val quoteEt : EditText = view.findViewById(R.id.quote)
 
         authorEt.setText(quoteAuthor)
         quoteEt.setText(quote)
@@ -85,7 +86,7 @@ class LoginLightFragment : Fragment(R.layout.fragment_login_light)  {
             val user = User(name)
             userViewModel.addUser(user)
             Toast.makeText(requireContext(), "Welcome, $name",Toast.LENGTH_LONG).show()
-            view.findNavController().navigate(R.id.action_login_light_to_main_light,
+            view.findNavController().navigate(R.id.action_fragment_login_to_fragment_main,
                 MainFragment.createBundle(name))
         }
         else{

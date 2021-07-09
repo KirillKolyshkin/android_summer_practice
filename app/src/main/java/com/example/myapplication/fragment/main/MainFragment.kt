@@ -11,14 +11,13 @@ import com.example.myapplication.R
 import com.example.myapplication.data.UserDatabase
 import com.example.myapplication.data.entities.Task
 import com.example.myapplication.data.view_model.UserViewModel
-import com.example.myapplication.databinding.FragmentMainLightBinding
 import com.example.myapplication.fragment.main.adapter.TaskAdapter
 import java.util.stream.Collector
 import java.util.stream.Collectors
 
 class MainFragment : Fragment() {
 
-    private var binding: FragmentMainLightBinding? = null
+    //private var binding: FragmentMainLightBinding? = null
     private var adapter: TaskAdapter? = null
     private lateinit var userViewModel: UserViewModel
 
@@ -60,11 +59,11 @@ class MainFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.loginFragment -> {
-                findNavController().navigate(R.id.action_main_light_to_login_light)
+                findNavController().navigate(R.id.action_fragment_main_to_fragment_login)
                 return true
             }
             R.id.settingsFragment -> {
-                findNavController().navigate(R.id.action_main_light_to_settings_light)
+                findNavController().navigate(R.id.action_fragment_main_to_fragment_settings)
                 return true
             }
         }
