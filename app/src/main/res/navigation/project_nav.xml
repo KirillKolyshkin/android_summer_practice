@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/login_light"
-        android:name="com.example.myapplication.fragment.LoginLightFragment"
+        android:name="com.example.myapplication.fragment.login.LoginLightFragment"
         tools:layout="@layout/fragment_login_light"
     >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/main_light"
-        android:name="com.example.myapplication.fragment.LoginLightFragment"
+        android:name="com.example.myapplication.fragment.login.LoginLightFragment"
         tools:layout="@layout/fragment_main_light"
         />
 </navigation>
