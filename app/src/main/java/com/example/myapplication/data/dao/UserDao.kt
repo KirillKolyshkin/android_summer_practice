@@ -21,11 +21,11 @@ interface UserDao {
     suspend fun findUserByName(name: String) : User
 
     @Query("SELECT * FROM tasks WHERE task_id = :task_id LIMIT 1")
-    suspend fun findTaskById(task_id: Int)
+    suspend fun findTaskById(task_id: Int) : Task
 
     @Transaction
-    @Query("SELECT * FROM user_table WHERE name = :name")
-    suspend fun getTasksOfUser(name: String) : List<UserWithTasks>
+    @Query("SELECT * FROM user_table WHERE name = :name LIMIT 1")
+    suspend fun getTasksOfUser(name: String) : UserWithTasks
 
     @Update
     suspend fun updateUser(user: User)

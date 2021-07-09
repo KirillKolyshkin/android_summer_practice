@@ -7,6 +7,7 @@ data class UserWithTasks(
     @Embedded val user: User,
     @Relation(
         parentColumn = "name",
+        entity = Task::class,
         entityColumn = "task_id"
     )
     val tasks: List<Task>
