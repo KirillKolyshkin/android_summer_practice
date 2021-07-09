@@ -5,6 +5,8 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
+import java.util.*
+
 
 @Entity(tableName = "tasks",
         foreignKeys = [ForeignKey(entity = User::class,
@@ -14,11 +16,11 @@ import androidx.room.PrimaryKey
 )
 data class Task(
     @PrimaryKey(autoGenerate = true)
-    val task_id: Int,
+    val taskId: Int,
     @ColumnInfo(name = "text")
     var text: String,
     @ColumnInfo(name = "timestamp")
-    var timestamp: Long,
+    var timestamp: Calendar,
     @ColumnInfo(name = "state")
     var isDode: Boolean,
 )

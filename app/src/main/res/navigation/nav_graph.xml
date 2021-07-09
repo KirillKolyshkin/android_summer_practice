@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragment_login"
-        android:name="com.example.myapplication.fragment_login"
+        android:name="com.example.myapplication.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_main"
-        android:name="com.example.myapplication.fragment_main"
+        android:name="com.example.myapplication.fragment.main.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main">
         <action
@@ -30,11 +30,12 @@
             android:id="@+id/action_fragment_main_to_fragment_login"
             app:destination="@id/fragment_login"
             app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right" />
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popUpTo="com.android.tools.property.panel.api.EnumValue$Companion$LOADING$1@35781c23" />
     </fragment>
     <fragment
         android:id="@+id/fragment_settings"
-        android:name="com.example.myapplication.fragment_settings"
+        android:name="com.example.myapplication.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings">
         <action
