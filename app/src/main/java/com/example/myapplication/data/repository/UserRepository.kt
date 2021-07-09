@@ -22,6 +22,7 @@ class UserRepository(private val userDao: UserDao) {
          return userDao.getTasksOfUser(name).tasks
     }
 
+
     suspend fun findUserByName(name: String): User{
         return userDao.findUserByName(name)
     }
@@ -34,6 +35,7 @@ class UserRepository(private val userDao: UserDao) {
         userDao.updateUser(user)
     }
 
+
     suspend fun updateTask(task: Task){
         userDao.updateTask(task)
     }
@@ -45,4 +47,5 @@ class UserRepository(private val userDao: UserDao) {
     suspend fun deleteUser(user: User){
         userDao.deleteUser(user)
     }
+
 }

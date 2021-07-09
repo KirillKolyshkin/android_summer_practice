@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class UserViewModel(application: Application) : AndroidViewModel(application) {
+
     private val getAllData : LiveData<List<User>>
     private val repository : UserRepository
 
@@ -19,6 +20,8 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         val userDao = UserDatabase.getDatabase(application).userDao()
         repository = UserRepository(userDao)
         getAllData = repository.getAllUsers
+
+
     }
 
     fun addUser (user : User){
@@ -26,6 +29,7 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
             repository.addUser(user)
         }
     }
+
 
     fun getAllTasksOfUser(name: String): List<Task>?{
         var tasks: List<Task>? = null
@@ -80,4 +84,5 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
             repository.deleteUser(user)
         }
     }
+
 }
