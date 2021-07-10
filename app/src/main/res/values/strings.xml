@@ -17,5 +17,13 @@
     //пример времени
     <string name="task_task_t">Task task task</string>
     //пример задания
+    <string name="hour_hint">hh</string>
+    <string name="minutes_hint">mm</string>
+    <string name="day_hint">dd</string>
+    <string name="month_hint">MM</string>
+    <string name="year_hint">YYYY</string>
+    <string name="task_hint">your task</string>
+    <string name="point">.</string>
+    <string name="colon">:</string>
 
 </resources>

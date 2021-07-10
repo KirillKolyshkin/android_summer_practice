@@ -8,7 +8,7 @@ import com.example.myapplication.data.view_model.UserViewModel
 import com.example.myapplication.databinding.ItemTaskBinding
 
 class TaskAdapter(
-    var list: List<Task>,
+    private var list: List<Task>,
     private val userViewModel: UserViewModel,
     private val action: (Task) -> Unit
 ) : RecyclerView.Adapter<TaskHolder>() {

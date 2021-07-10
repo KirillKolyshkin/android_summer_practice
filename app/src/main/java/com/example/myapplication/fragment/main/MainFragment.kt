@@ -1,8 +1,10 @@
 package com.example.myapplication.fragment.main
 
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -11,6 +13,7 @@ import com.example.myapplication.R
 import com.example.myapplication.data.entities.Task
 import com.example.myapplication.data.view_model.UserViewModel
 import com.example.myapplication.databinding.FragmentMainBinding
+import com.example.myapplication.databinding.TaskEditingBinding
 import com.example.myapplication.fragment.main.adapter.TaskAdapter
 import java.util.*
 
@@ -20,9 +23,10 @@ class MainFragment : Fragment() {
     private var year: Int? = null
     private var month: Int? = null
     private var day: Int? = null
+    private var taskBinding: TaskEditingBinding? = null
     private var binding: FragmentMainBinding? = null
     private var adapter: TaskAdapter? = null
-    private lateinit var userViewModel : UserViewModel
+    private lateinit var userViewModel: UserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +50,11 @@ class MainFragment : Fragment() {
         val currentDate = day.toString() + "." + month.toString() + "." + day.toString()
         binding?.tvDate?.text = currentDate
 
-        var tasks = getUserTasks()
+        var percentOfCompletedTasks = "100%"
+        val tasks = getUserTasksForCurrentData()
         if (tasks != null) {
-            adapter = TaskAdapter(tasks, userViewModel){ task ->
+            percentOfCompletedTasks = getPercentOfCompletedTasks(tasks).toString() + "%"
+            adapter = TaskAdapter(tasks, userViewModel) { task ->
                 showAlertDialog(task)
             }
             binding?.rvTasks?.also {
@@ -56,6 +62,7 @@ class MainFragment : Fragment() {
                 it.adapter = adapter
             }
         }
+        binding?.tvPercents?.text = percentOfCompletedTasks
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -82,22 +89,69 @@ class MainFragment : Fragment() {
         binding = null
     }
 
-    private fun showAlertDialog(task: Task) {
-        // alert dialog for editing the task
+    private fun getPercentOfCompletedTasks(tasks: List<Task>): Int {
+        return tasks.filter { task -> task.isDode }
+            .count() * 100 / tasks.size
     }
 
-    private fun getUserTasks(): List<Task>?{
+    private fun showAlertDialog(task: Task) {
+        taskBinding = TaskEditingBinding.inflate(LayoutInflater.from(requireContext()))
+        setDataForEditText(task)
+
+        AlertDialog.Builder(requireContext())
+            .setView(R.layout.task_editing)
+            .setCancelable(true)
+            .setPositiveButton("Save") { dialog, _ ->
+                if (isAllDataWritten(taskBinding)) {
+                    updateData(taskBinding, task)
+                    Toast.makeText(requireContext(), "Changes saved", Toast.LENGTH_LONG).show()
+                    dialog.dismiss()
+                } else
+                    Toast.makeText(requireContext(), "Some fields are empty!", Toast.LENGTH_LONG)
+                        .show()
+            }
+            .setNegativeButton("Delete") { dialog, _ ->
+                userViewModel.deleteTask(task)
+                Toast.makeText(requireContext(), "Task deleted", Toast.LENGTH_LONG).show()
+                dialog.dismiss()
+            }
+            .show()
+    }
+
+    private fun setDataForEditText(task: Task) {
+        taskBinding?.etHour?.setText(task.timestamp.get(Calendar.HOUR))
+        taskBinding?.etMinute?.setText(task.timestamp.get(Calendar.MINUTE))
+        taskBinding?.etDay?.setText(task.timestamp.get(Calendar.DAY_OF_MONTH))
+        taskBinding?.etMonth?.setText(task.timestamp.get(Calendar.MONTH))
+        taskBinding?.etYear?.setText(task.timestamp.get(Calendar.YEAR))
+    }
+
+    private fun updateData(binding: TaskEditingBinding?, task: Task) {
+        val newDate = GregorianCalendar()
+        newDate.set(
+            binding?.etYear?.text.toString().toInt(),
+            binding?.etMonth?.text.toString().toInt(),
+            binding?.etDay?.text.toString().toInt(),
+            binding?.etHour?.text.toString().toInt(),
+            binding?.etMinute?.text.toString().toInt()
+        )
+        task.timestamp = newDate
+        userViewModel.updateTask(task)
+    }
+
+    private fun getUserTasksForCurrentData(): List<Task>? {
         var tasks = arguments?.getString(ARG_USERNAME)?.let {
             userViewModel.getAllTasksOfUser(it)
         }
-        if (tasks != null) tasks = getTasksForCurrentDate(tasks)
-        return when(tasks?.size){
+        if (tasks != null)
+            tasks = filterTasks(tasks)
+        return when (tasks?.size) {
             0 -> null
             else -> tasks
         }
     }
 
-    private fun getTasksForCurrentDate(tasks: List<Task>): List<Task> {
+    private fun filterTasks(tasks: List<Task>): List<Task> {
         return tasks.filter { task ->
             task.timestamp.get(Calendar.YEAR) == year &&
                     task.timestamp.get(Calendar.MONTH) == month &&
@@ -105,6 +159,14 @@ class MainFragment : Fragment() {
         }
             .sortedBy { task -> task.timestamp }
             .toList()
+    }
+
+    private fun isAllDataWritten(binding: TaskEditingBinding?): Boolean {
+        return (binding?.etHour?.text != null) &&
+                (binding?.etMinute?.text != null) &&
+                (binding?.etDay?.text != null) &&
+                (binding?.etMonth?.text != null) &&
+                (binding?.etYear?.text != null)
     }
 
     private fun getCurrentDate() {

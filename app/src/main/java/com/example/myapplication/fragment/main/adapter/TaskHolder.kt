@@ -17,7 +17,7 @@ class TaskHolder(
         binding.tvTask.text = item.text
         binding.tvTime.text = time
         binding.checkBoxTask.isChecked = item.isDode
-        binding.checkBoxTask.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.checkBoxTask.setOnCheckedChangeListener {_, isChecked ->
             item.isDode = isChecked
             updateTask(item)
         }

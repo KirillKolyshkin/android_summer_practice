@@ -13,7 +13,7 @@ class DateTypeConverter {
     }
 
     @TypeConverter
-    fun toTimestamp(date: Calendar): Timestamp {
+    fun toTime(date: Calendar): Timestamp {
         return Timestamp(date.timeInMillis)
     }
 }
