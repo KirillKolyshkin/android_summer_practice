@@ -1,6 +1,5 @@
 package com.example.myapplication.fragment.main
 
-
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -35,6 +34,9 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMainBinding.inflate(inflater, container, false)
+        binding!!.floatingActionButton.setOnClickListener {
+            findNavController().navigate(R.id.action_fragment_main_to_addTaskFragment)
+        }
         return binding?.root
     }
 

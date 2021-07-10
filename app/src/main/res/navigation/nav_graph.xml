@@ -32,6 +32,9 @@
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popUpTo="com.android.tools.property.panel.api.EnumValue$Companion$LOADING$1@35781c23" />
+        <action
+            android:id="@+id/action_fragment_main_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_settings"
@@ -43,4 +46,17 @@
             app:destination="@id/fragment_main"
             app:enterAnim="@android:anim/slide_in_left" />
     </fragment>
+    <fragment
+        android:id="@+id/addTaskFragment"
+        android:name="com.example.myapplication.fragment.main.add.AddTaskFragment"
+        android:label="fragment_add_task"
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_addTaskFragment_to_fragment_main"
+            app:destination="@id/fragment_main" />
+    </fragment>
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.example.myapplication.fragment.main.add.CalendarFragment"
+        android:label="CalendarFragment" />
 </navigation>
