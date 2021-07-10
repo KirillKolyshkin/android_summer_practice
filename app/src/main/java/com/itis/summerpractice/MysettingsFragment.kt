@@ -1,34 +1,33 @@
 package com.itis.summerpractice
 
-
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Switch
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat.getSystemService
 import com.google.android.material.textfield.TextInputLayout
 
+class MysettingsFragment : Fragment(R.layout.fragment_mysettings) {
 
-class MysettingsActivity : AppCompatActivity() {
-    override fun onStart() {
-        super.onStart()
-    }
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.activity_mysettings)
 
         loadData()
 
-        findView()
+        findView(view)
 
         CreateNotificationChannel()
 
@@ -64,18 +63,16 @@ class MysettingsActivity : AppCompatActivity() {
             }
             saveData()
         }
-
     }
 
     private val CHANNEL_ID = "channel_id_example_01"
     private val notificationID = 101
 
-    private var switch1:Switch?= null
-    private var switch2:Switch?=null
+    private var switch1: Switch?= null
+    private var switch2: Switch?=null
     private var etEmail: EditText? = null
     private var tiEmail: TextInputLayout? = null
     private var btnLogin: Button? = null
-
 
     private fun emailChange(){
         btnLogin?.setOnClickListener {
@@ -142,13 +139,11 @@ class MysettingsActivity : AppCompatActivity() {
         sw_switch2.isChecked = savedBoolean
     }
 
-    private fun findView(){
-        etEmail = findViewById(R.id.et_email)
-        tiEmail = findViewById(R.id.ti_email)
-        switch1 = findViewById(R.id.sw_switch1)
-        switch2 = findViewById(R.id.sw_switch2)
-        btnLogin = findViewById(R.id.btn_login)
+    private fun findView(view: View){
+        etEmail = view.findViewById(R.id.et_email)
+        tiEmail = view.findViewById(R.id.ti_email)
+        switch1 = view.findViewById(R.id.sw_switch1)
+        switch2 = view.findViewById(R.id.sw_switch2)
+        btnLogin = view.findViewById(R.id.btn_login)
     }
 }
-
-
