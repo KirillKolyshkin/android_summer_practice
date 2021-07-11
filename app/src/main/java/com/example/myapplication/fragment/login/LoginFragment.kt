@@ -1,4 +1,4 @@
-package com.example.myapplication.fragment
+package com.example.myapplication.fragment.login
 
 import androidx.fragment.app.Fragment
 import android.os.Bundle
@@ -13,13 +13,18 @@ import androidx.navigation.findNavController
 import com.example.myapplication.R
 import com.example.myapplication.data.entities.User
 import com.example.myapplication.data.view_model.UserViewModel
+import com.example.myapplication.databinding.FragmentLoginBinding
 import com.example.myapplication.fragment.main.MainFragment
-import kotlin.random.Random
 
 
 class LoginFragment : Fragment(R.layout.fragment_login)  {
 
-    private lateinit var userViewModel : UserViewModel
+   // private lateinit var userViewModel : UserViewModel
+    private var binding: FragmentLoginBinding? = null
+    private var map : HashMap<String,String> = hashMapOf<String,String>(
+        "Adelya" to "",
+        "Nastya" to "",
+        "Kirill" to "",)
     private var quotes : List<String> = listOf(
         "Every minute you spend in planning saves 10 minutes in execution",
         "Don’t waste your time in anger, regrets, worries, and grudges. Life is too short to be unhappy",
@@ -37,61 +42,48 @@ class LoginFragment : Fragment(R.layout.fragment_login)  {
         "©Anthony Doerr",
     )
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
 
-    ): View {
-        val view: View =  inflater.inflate(R.layout.fragment_login, container, false)
+        return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?){
+        super.onViewCreated(view, savedInstanceState)
+        //userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
         val randomValue: Int = (0..5).random()
-
         val quote : String = quotes[randomValue]
         val quoteAuthor : String = quotesAuthors[randomValue]
 
-        val authorEt : EditText = view.findViewById(R.id.quote_author)
-        val quoteEt : EditText = view.findViewById(R.id.quote)
-
-        authorEt.setText(quoteAuthor)
-        quoteEt.setText(quote)
+        binding?.quoteAuthor?.text = quoteAuthor
+        binding?.quote?.text = quote
 
 
-
-        val loginBtn: Button = view.findViewById(R.id.button)
-
-        val name : String = view.findViewById<EditText>(R.id.et_username).toString()
-
-
-        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
-
-
-
-        loginBtn.setOnClickListener(){
-
-            insertDataToDatabase(name, view)
-
-
+        binding?.button?.setOnClickListener(){
+            insertDataToDatabase(view)
         }
-
-        return view
     }
 
+    private fun insertDataToDatabase(view: View){
 
-
-    private fun insertDataToDatabase(name : String , view: View){
-
+        val name : String = binding?.etUsername?.text.toString()
         if(name.isNotEmpty()){
-            val user = User(name)
-            userViewModel.addUser(user)
+           // val user = User(name)
+           // userViewModel.addUser(user)
+            if (!map.containsKey(name)){
+                map.put(name,"")
+            }
             Toast.makeText(requireContext(), "Welcome, $name",Toast.LENGTH_LONG).show()
-            view.findNavController().navigate(R.id.action_fragment_login_to_fragment_main,
-                MainFragment.createBundle(name))
+            view.findNavController().navigate(
+                R.id.action_fragment_login_to_fragment_main)
         }
         else{
             Toast.makeText(requireContext(), "Please write your name",Toast.LENGTH_LONG).show()
         }
-
     }
 }
