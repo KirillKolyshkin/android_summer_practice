@@ -5,27 +5,33 @@ import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Switch
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputLayout
 
+
 class MysettingsFragment : Fragment(R.layout.fragment_mysettings) {
+
+    private val CHANNEL_ID = "channel_id_example_01"
+    private val notificationID = 101
+
+    private var switch1: Switch?= null
+    private var switch2: Switch?=null
+    private var etEmail: EditText? = null
+    private var tiEmail: TextInputLayout? = null
+    private var btnLogin: Button? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         super.onCreate(savedInstanceState)
 
-        loadData()
+        loadData(view)
 
         findView(view)
 
@@ -33,14 +39,16 @@ class MysettingsFragment : Fragment(R.layout.fragment_mysettings) {
 
         emailChange()
 
+        if(switch1!!.isChecked){
+            sendNotification()
+        }
+
         switch1!!.setOnCheckedChangeListener { buttonView, isChecked ->
             if(isChecked){
                 sendNotification()
             }
 
         }
-
-
         if (switch2!!.isChecked) {
             AppCompatDelegate.setDefaultNightMode(
                 AppCompatDelegate.MODE_NIGHT_YES
@@ -61,18 +69,10 @@ class MysettingsFragment : Fragment(R.layout.fragment_mysettings) {
                     AppCompatDelegate.MODE_NIGHT_NO
                 )
             }
-            saveData()
+            saveData(view)
         }
     }
 
-    private val CHANNEL_ID = "channel_id_example_01"
-    private val notificationID = 101
-
-    private var switch1: Switch?= null
-    private var switch2: Switch?=null
-    private var etEmail: EditText? = null
-    private var tiEmail: TextInputLayout? = null
-    private var btnLogin: Button? = null
 
     private fun emailChange(){
         btnLogin?.setOnClickListener {
@@ -96,6 +96,7 @@ class MysettingsFragment : Fragment(R.layout.fragment_mysettings) {
 //        }
 //    }
 
+
     private fun CreateNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name = "Notification title"
@@ -105,38 +106,51 @@ class MysettingsFragment : Fragment(R.layout.fragment_mysettings) {
                 description = descriptionText
             }
             val notificationManager: NotificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+                getActivity()?.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             notificationManager.createNotificationChannel(channel)
         }
     }
 
     private fun sendNotification(){
-        val builder = NotificationCompat.Builder(this,CHANNEL_ID)
+        val builder = NotificationCompat.Builder(requireContext(),CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentTitle("ToDo")
             .setContentText("You have some to do things")
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-        with(NotificationManagerCompat.from(this)){
+        with(NotificationManagerCompat.from(requireContext())){
             notify(notificationID,builder.build())
         }
     }
 
 
-    private fun saveData() {
-        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+    private fun saveData(view: View) {
+        val sharedPreferences = this.requireActivity()
+            .getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+
+//      val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.apply{
-            val sw_switch2=findViewById<Switch>(R.id.sw_switch2)
+            val sw_switch1=view.findViewById<Switch>(R.id.sw_switch1)
+            val sw_switch2=view.findViewById<Switch>(R.id.sw_switch2)
+
             putBoolean("BOOLEAN_KEY", sw_switch2.isChecked)
+            putBoolean("BOOLEAN_KEY", sw_switch1.isChecked)
         }.apply()
-        Toast.makeText(this, "Data saved", Toast.LENGTH_SHORT).show()
     }
 
-    fun loadData() {
-        val sw_switch2=findViewById<Switch>(R.id.sw_switch2)
-        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+    fun loadData(view: View) {
+        val sw_switch1=view.findViewById<Switch>(R.id.sw_switch1)
+        val sw_switch2= view.findViewById<Switch>(R.id.sw_switch2)
+        val sharedPreferences = this.requireActivity()
+            .getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
+//        val sharedPreferences = getSharedPreferences("sharedPrefs", Context.MODE_PRIVATE)
         val savedBoolean=sharedPreferences.getBoolean("BOOLEAN_KEY",false)
-        sw_switch2.isChecked = savedBoolean
+        if (sw_switch2 != null) {
+            sw_switch2.isChecked = savedBoolean
+        }
+        if (sw_switch1 != null) {
+            sw_switch1.isChecked = savedBoolean
+        }
     }
 
     private fun findView(view: View){
