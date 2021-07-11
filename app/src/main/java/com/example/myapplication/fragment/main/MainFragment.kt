@@ -34,15 +34,16 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMainBinding.inflate(inflater, container, false)
-        binding!!.floatingActionButton.setOnClickListener {
-            findNavController().navigate(R.id.action_fragment_main_to_addTaskFragment)
-        }
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+
+        binding!!.floatingActionButton.setOnClickListener {
+            findNavController().navigate(R.id.action_fragment_main_to_addTaskFragment)
+        }
 
         getCurrentDate()
         val currentDate = day.toString() + "." + month.toString() + "." + day.toString()
