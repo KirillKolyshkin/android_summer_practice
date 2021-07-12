@@ -2,6 +2,7 @@ package com.example.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+
 import androidx.navigation.NavController
 import com.example.myapplication.data.UserDatabase
 import androidx.navigation.findNavController
@@ -18,6 +19,8 @@ class MainActivity : AppCompatActivity()  {
         //val userDB = UserDatabase.getDatabase(this).userDao()
         controller = (supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment)
             .navController
+
+
     }
 
     override fun onSupportNavigateUp(): Boolean = controller.navigateUp()
