@@ -25,5 +25,8 @@
     <string name="task_hint">your task</string>
     <string name="point">.</string>
     <string name="colon">:</string>
+    <string name="save">Save</string>
+    <string name="choose_date">Press to choose date</string>
+    <string name="adding_task">Write task</string>
 
 </resources>

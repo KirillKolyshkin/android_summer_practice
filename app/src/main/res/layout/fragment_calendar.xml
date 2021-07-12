@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    style="@style/ThemeBase"
+    android:paddingTop="@dimen/spacing_very_large"
+    android:paddingHorizontal="@dimen/spacing_tiniest"
+    tools:context="fragment.main.add.CalendarFragment">
+
+    <FrameLayout
+        android:id="@+id/LinearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/beige"
+            android:clickable="true"
+            android:firstDayOfWeek="2"
+            android:focusable="true" />
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

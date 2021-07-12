@@ -6,19 +6,22 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.R
+import com.example.myapplication.data.UserDatabase
 import com.example.myapplication.data.entities.Task
-import com.example.myapplication.data.view_model.UserViewModel
 import com.example.myapplication.databinding.FragmentMainBinding
 import com.example.myapplication.databinding.TaskEditingBinding
 import com.example.myapplication.fragment.main.adapter.TaskAdapter
+import com.example.myapplication.fragment.main.add.CalendarFragment
+import com.example.myapplication.fragment.settings.SettingsFragment
 import java.util.*
+import kotlin.collections.HashMap
 
 class MainFragment : Fragment() {
 
+    private var users : HashMap<String, List<Task>>? = null
     private var calendar: Calendar? = null
     private var year: Int? = null
     private var month: Int? = null
@@ -26,7 +29,7 @@ class MainFragment : Fragment() {
     private var taskBinding: TaskEditingBinding? = null
     private var binding: FragmentMainBinding? = null
     private var adapter: TaskAdapter? = null
-    private lateinit var userViewModel: UserViewModel
+    private var username: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,18 +47,19 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
+        username = arguments?.getString(ARG_USERNAME)
+        users = UserDatabase.getUserDatabase()
 
         getCurrentDate()
-        val currentDate = day.toString() + "." + month.toString() + "." + day.toString()
+        val currentDate = day.toString() + "." + month.toString() + "." + year.toString()
         binding?.tvDate?.text = currentDate
 
         var percentOfCompletedTasks = "100%"
-        val tasks = getUserTasksForCurrentData()
+        val tasks = getUserTasksForCurrentData(username)
         if (tasks != null) {
             percentOfCompletedTasks = getPercentOfCompletedTasks(tasks).toString() + "%"
-            adapter = TaskAdapter(tasks, userViewModel) { task ->
-                showAlertDialog(task)
+            adapter = TaskAdapter(username, users!!, tasks) { task ->
+                task?.let { showAlertDialog(it) }
             }
             binding?.rvTasks?.also {
                 it.layoutManager = LinearLayoutManager(requireContext())
@@ -63,6 +67,11 @@ class MainFragment : Fragment() {
             }
         }
         binding?.tvPercents?.text = percentOfCompletedTasks
+
+        binding?.floatingActionButton?.setOnClickListener{
+            findNavController().navigate(R.id.action_fragment_main_to_calendarFragment,
+            CalendarFragment.createBundle(username.toString()))
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -77,7 +86,8 @@ class MainFragment : Fragment() {
                 true
             }
             R.id.settingsFragment -> {
-                findNavController().navigate(R.id.action_fragment_main_to_fragment_settings)
+                findNavController().navigate(R.id.action_fragment_main_to_fragment_settings,
+                SettingsFragment.createBundle(username.toString()))
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -100,7 +110,6 @@ class MainFragment : Fragment() {
 
         AlertDialog.Builder(requireContext())
             .setView(R.layout.task_editing)
-            .setCancelable(true)
             .setPositiveButton("Save") { dialog, _ ->
                 if (isAllDataWritten(taskBinding)) {
                     updateData(taskBinding, task)
@@ -111,11 +120,24 @@ class MainFragment : Fragment() {
                         .show()
             }
             .setNegativeButton("Delete") { dialog, _ ->
-                userViewModel.deleteTask(task)
+                deleteTask(task)
                 Toast.makeText(requireContext(), "Task deleted", Toast.LENGTH_LONG).show()
                 dialog.dismiss()
             }
+            .setNeutralButton("Cancel"){ dialog, _ ->
+                dialog.dismiss()
+            }
             .show()
+    }
+
+    private fun deleteTask(task: Task) {
+        var tasks = users?.get(username)?.toMutableList()
+        for(i in tasks?.indices!!){
+            if(task == tasks[i]){
+                tasks.remove(tasks[i])
+                break
+            }
+        }
     }
 
     private fun setDataForEditText(task: Task) {
@@ -136,14 +158,18 @@ class MainFragment : Fragment() {
             binding?.etMinute?.text.toString().toInt()
         )
         task.timestamp = newDate
-        userViewModel.updateTask(task)
+        var tasks = users?.get(username)
+        for(i in tasks?.indices!!){
+            if(task == tasks[i]){
+                tasks[i].isDode = !tasks[i].isDode
+            }
+            break
+        }
     }
 
-    private fun getUserTasksForCurrentData(): List<Task>? {
-        var tasks = arguments?.getString(ARG_USERNAME)?.let {
-            userViewModel.getAllTasksOfUser(it)
-        }
-        if (tasks != null)
+    private fun getUserTasksForCurrentData(username: String?): List<Task>? {
+        var tasks = users?.get(username)
+        if (tasks?.size!= null)
             tasks = filterTasks(tasks)
         return when (tasks?.size) {
             0 -> null
@@ -172,7 +198,7 @@ class MainFragment : Fragment() {
     private fun getCurrentDate() {
         calendar = Calendar.getInstance()
         year = calendar?.get(Calendar.YEAR)
-        month = calendar?.get(Calendar.MONTH)
+        month = calendar?.get(Calendar.MONTH).toString().toInt()+1
         day = calendar?.get(Calendar.DAY_OF_MONTH)
     }
 

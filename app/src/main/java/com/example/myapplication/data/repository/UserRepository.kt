@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import com.example.myapplication.data.dao.UserDao
 import com.example.myapplication.data.entities.Task
 import com.example.myapplication.data.entities.User
+import com.example.myapplication.data.entities.UserWithTasks
 
 class UserRepository(private val userDao: UserDao) {
 
